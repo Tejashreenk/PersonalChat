@@ -16,15 +16,16 @@ conn = sqlite3.connect('MyCompany.db')
 cursor = conn.cursor()
 
 # Create a table
-cursor.execute('''
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL
-)
-
+# cursor.execute("""
+# CREATE TABLE users (
+#     id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     name TEXT NOT NULL,
+#     email TEXT NOT NULL
+# );
+# """)
+cursor.execute("""
 CREATE TABLE Companies (
-    CompanyID INT PRIMARY KEY,
+    CompanyID INTEGER PRIMARY KEY AUTOINCREMENT,
     CompanyName VARCHAR(255) NOT NULL,
     Address VARCHAR(255),
     City VARCHAR(100),
@@ -32,10 +33,10 @@ CREATE TABLE Companies (
     ZipCode VARCHAR(10),
     Country VARCHAR(100),
     PhoneNumber VARCHAR(20)
-);
+);""")
 
-CREATE TABLE Employees (
-    EmployeeID INT PRIMARY KEY,
+cursor.execute("""CREATE TABLE Employees (
+    EmployeeID INTEGER PRIMARY KEY AUTOINCREMENT,
     FirstName VARCHAR(100) NOT NULL,
     LastName VARCHAR(100) NOT NULL,
     Email VARCHAR(255) UNIQUE NOT NULL,
@@ -43,23 +44,23 @@ CREATE TABLE Employees (
     HireDate DATE NOT NULL,
     CompanyID INT,
     FOREIGN KEY (CompanyID) REFERENCES Companies(CompanyID)
-);
+);""")
 
-CREATE TABLE Roles (
-    RoleID INT PRIMARY KEY,
+cursor.execute("""CREATE TABLE Roles (
+    RoleID INTEGER PRIMARY KEY AUTOINCREMENT,
     RoleName VARCHAR(100) NOT NULL,
     Description TEXT
-);
+);""")
 
-CREATE TABLE EmployeeRoles (
-    EmployeeRoleID INT PRIMARY KEY,
+cursor.execute("""CREATE TABLE EmployeeRoles (
+    EmployeeRoleID INTEGER PRIMARY KEY AUTOINCREMENT, 
     EmployeeID INT,
     RoleID INT,
     AssignedDate DATE NOT NULL,
     FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
-''')
+""")
 
 # Insert data into the table
 cursor.execute('''

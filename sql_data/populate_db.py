@@ -15,7 +15,7 @@ def random_phone_number():
     return ''.join(random.choices(string.digits, k=10))
 
 # Insert random data into Companies
-for _ in range(100):
+for i in range(100):
     company_name = fake.company()
     address = fake.street_address()
     city = fake.city()
@@ -23,6 +23,7 @@ for _ in range(100):
     zipcode = fake.zipcode()
     country = fake.country()
     phone_number = random_phone_number()
+    # company_id = i
     
     cursor.execute("""
         INSERT INTO Companies (CompanyName, Address, City, State, ZipCode, Country, PhoneNumber)
@@ -30,7 +31,7 @@ for _ in range(100):
     """, (company_name, address, city, state, zipcode, country, phone_number))
 
 # Insert random data into Employees
-for _ in range(100):
+for i in range(500):
     first_name = fake.first_name()
     last_name = fake.last_name()
     email = fake.email()
